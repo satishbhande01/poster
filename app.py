@@ -8,7 +8,7 @@ class_labels = model.names
 
 st.title("🛠️ Encrypted Image Decoder")
 
-uploaded_image = st.file_uploader("🔒 Upload an encrypted image", type=["jpg", "png"])
+uploaded_image = st.file_uploader("🔒 Upload an encrypted image", type=["jpg", "png","jpeg"])
 
 if uploaded_image:
     img = Image.open(uploaded_image)
