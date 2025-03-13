@@ -3,7 +3,7 @@ from PIL import Image
 from ultralytics import YOLO
 
 # Load the trained YOLO model
-model = YOLO('runs/classify/train/weights/best.pt')
+model = YOLO('runs/content/runs/classify/train/weights/best.pt')
 class_labels = model.names
 
 st.title("🛠️ Encrypted Image Decoder")
