@@ -12,7 +12,7 @@ uploaded_image = st.file_uploader("🔒 Upload an encrypted image", type=["jpg",
 
 if uploaded_image:
     img = Image.open(uploaded_image)
-    st.image(img, caption="✅ Uploaded Encrypted Image", use_column_width=True)
+    st.image(img, caption="✅ Uploaded Encrypted Image", use_container_width=True)
 
     if st.button("🔓 Decrypt"):
         with st.spinner("🧠 Decoding..."):
@@ -25,6 +25,6 @@ if uploaded_image:
             original_image_path = f"originals/{class_labels[predicted_class]}.jpg"
             try:
                 original_img = Image.open(original_image_path)
-                st.image(original_img, caption="✨ Decrypted Original Image", use_column_width=True)
+                st.image(original_img, caption="✨ Decrypted Original Image", use_container_width=True)
             except FileNotFoundError:
                 st.error("❌ Original image not found. Ensure the 'originals' folder has the correct images!")
