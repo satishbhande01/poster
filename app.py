@@ -29,6 +29,4 @@ if uploaded_image:
             except FileNotFoundError:
                 st.error("❌ Original image not found. Ensure the 'originals' folder has the correct images!")
 # Add a proper button that redirects to the link
-if st.button("📘 Learn More"):
-    st.experimental_rerun()
-    st.markdown("<meta http-equiv='refresh' content='0; url=https://satishbhande01.github.io/poster_info_page/'>", unsafe_allow_html=True)
+st.link_button("📘 Learn More", "https://satishbhande01.github.io/poster_info_page/")
