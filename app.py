@@ -28,3 +28,6 @@ if uploaded_image:
                 st.image(original_img, caption="✨ Decrypted Original Image", use_container_width=True)
             except FileNotFoundError:
                 st.error("❌ Original image not found. Ensure the 'originals' folder has the correct images!")
+# Add a Learn More button
+if st.button("📘 Learn More"):
+    st.markdown("[Click here to learn more!](https://satishbhande01.github.io/poster_info_page/)", unsafe_allow_html=True)
