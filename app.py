@@ -28,5 +28,7 @@ if uploaded_image:
                 st.image(original_img, caption="✨ Decrypted Original Image", use_container_width=True)
             except FileNotFoundError:
                 st.error("❌ Original image not found. Ensure the 'originals' folder has the correct images!")
-# Add a Learn More button that redirects directly to the link
-st.markdown("[📘 Learn More](https://satishbhande01.github.io/poster_info_page/)", unsafe_allow_html=True)
+# Add a proper button that redirects to the link
+if st.button("📘 Learn More"):
+    st.experimental_rerun()
+    st.markdown("<meta http-equiv='refresh' content='0; url=https://satishbhande01.github.io/poster_info_page/'>", unsafe_allow_html=True)
