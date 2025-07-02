@@ -1,5 +1,5 @@
 import streamlit as st
-from PIL import Image,ExifTags
+from PIL import Image,ImageOps
 from ultralytics import YOLO
 
 # Load the trained YOLO model
@@ -25,28 +25,9 @@ Feel free to use your Camera Directly from this app itself and get a nice zoom o
 
 uploaded_image = st.file_uploader("🔒 Upload an encrypted image (One of the images from the grid)", type=["jpg", "png","jpeg"])
 
-def fix_image_rotation(img: Image.Image) -> Image.Image:
-    try:
-        for orientation in ExifTags.TAGS.keys():
-            if ExifTags.TAGS[orientation] == 'Orientation':
-                break
-        exif = img._getexif()
-        if exif is not None:
-            orientation_value = exif.get(orientation, None)
-
-            if orientation_value == 3:
-                img = img.rotate(180, expand=True)
-            elif orientation_value == 6:
-                img = img.rotate(270, expand=True)
-            elif orientation_value == 8:
-                img = img.rotate(90, expand=True)
-    except Exception as e:
-        # If there's no EXIF or something fails, just return as-is
-        pass
-
 if uploaded_image:
     img = Image.open(uploaded_image)
-    img = fix_image_rotation(img)
+    img = ImageOps.exif_transpose(img)
     st.image(img, caption="✅ Uploaded Encrypted Image", use_container_width=True)
 
     if st.button("🔓 Decrypt"):
