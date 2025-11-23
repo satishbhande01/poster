@@ -6,7 +6,7 @@ import streamlit.components.v1 as components
 # Paste your Tailscale Funnel URL here!
 # Example: "https://my-laptop.tailnet-name.ts.net"
 # ==========================================
-NEW_APP_URL = "https://archlinux.tail378a15.ts.net/"
+NEW_APP_URL = "https://satishbhande-deploy-2652c-8501.icecloud.in/"
 
 st.set_page_config(page_title="Redirecting...", page_icon="🚀")
 
