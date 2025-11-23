@@ -1,59 +1,46 @@
 import streamlit as st
-from PIL import Image,ImageOps
-from ultralytics import YOLO
+import streamlit.components.v1 as components
 
-# Load the trained YOLO model
-model = YOLO('best.pt')
-class_labels = model.names
+# ==========================================
+# 🔧 CONFIGURATION
+# Paste your Tailscale Funnel URL here!
+# Example: "https://my-laptop.tailnet-name.ts.net"
+# ==========================================
+NEW_APP_URL = "https://archlinux.tail378a15.ts.net/"
 
-st.title("🛠️ Encrypted Image Decoder")
+st.set_page_config(page_title="Redirecting...", page_icon="🚀")
 
-st.write("""
-🎨 **Welcome!**
+# --- UI Layout ---
+st.title("Upgraded to local host!")
 
-This project is my way of integrating **AI** with something that would conventionally be considered *off the charts*...  
-*Hehe, get it? Charts!* 
+st.info(
+    "The **Encrypted Image Decoder** has moved to a dedicated server for faster performance and better stability."
+)
 
-Inspired by the idea of **visual encryption**, this app uses **YOLOv8** to decode encrypted segments from a poster grid and recover the original image behind the scenes.
+st.write("You should be redirected automatically in a moment...")
 
+# --- 1. The Manual Fallback Button ---
+# This is crucial in case the browser blocks the automatic script
+st.link_button(
+    "Click here to go to the App",
+    NEW_APP_URL,
+    type="primary",
+    use_container_width=True,
+)
 
-Think of it as AI solving a visual puzzle — try uploading one of the encrypted images and watch the magic unfold!
+# --- 2. The Automatic Redirect ---
+# This uses a meta-refresh tag AND a JavaScript redirect to ensure
+# the user is moved as quickly as possible.
+redirect_code = f"""
+<meta http-equiv="refresh" content="0; url={NEW_APP_URL}">
+<script>
+    window.top.location.href = "{NEW_APP_URL}";
+</script>
+"""
 
-Feel free to use your Camera Directly from this app itself and get a nice zoom on the box of your interest!
-""")
+# We render this as HTML. The height=0 makes it invisible.
+components.html(redirect_code, height=0)
 
-
-uploaded_image = st.file_uploader("🔒 Upload an encrypted image (One of the images from the grid)", type=["jpg", "png","jpeg"])
-
-if uploaded_image:
-    img = Image.open(uploaded_image)
-    img = ImageOps.exif_transpose(img)
-    st.image(img, caption="✅ Uploaded Encrypted Image", use_container_width=True)
-
-    if st.button("🔓 Decrypt"):
-        with st.spinner("🧠 Decoding..."):
-            results = model.predict(img)
-            predicted_class = results[0].probs.top1
-            confidence = results[0].probs.data[predicted_class] * 100
-
-            st.success(f"🔍 Predicted Class: **{class_labels[predicted_class]}** (Confidence: **{confidence:.2f}%**)")
-
-            original_image_path = f"originals/{class_labels[predicted_class]}.jpg"
-            try:
-                original_img = Image.open(original_image_path)
-                st.image(original_img, caption="✨ Decrypted Original Image", use_container_width=True)
-            except FileNotFoundError:
-                st.error("❌ Original image not found. Ensure the 'originals' folder has the correct images!")
-# Add a proper button that redirects to the link
-
-st.write("""
-By no means was this a perfectly functional project — it was more of a way to test my creativity.
-
-In fact, try uploading a completely random image... you'll still get a confident prediction! 😅  
-Which, of course, just means that my model needs more training data — and it should be learning **only from the poster**, not the rest.
-""")
-
-st.markdown("Feel free to reach out to me via [LinkedIn](https://www.linkedin.com/in/satish-bhande-6179a11b6/) to let me know if you had any guesses of what the images could actually be and do let me know if you had fun! Lastly...Sincerly Thank you for taking out your time.")
-
-st.write("Once you are done Decrypting...Click the Learn More Button to gain more insights about this project.")
-st.link_button("📘 Learn More", "https://satishbhande01.github.io/poster_info_page/")
+# Optional: Footer
+st.divider()
+st.caption("Hosted via Tailscale Funnel • 2024")
