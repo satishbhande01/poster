@@ -11,7 +11,7 @@ NEW_APP_URL = "https://satishbhande-deploy-2652c-8501.icecloud.in/"
 st.set_page_config(page_title="Redirecting...", page_icon="🚀")
 
 # --- UI Layout ---
-st.title("Upgraded to local host!")
+st.title("Upgraded to ICE Cloud host")
 
 st.info(
     "The **Encrypted Image Decoder** has moved to a dedicated server for faster performance and better stability."
@@ -43,4 +43,4 @@ components.html(redirect_code, height=0)
 
 # Optional: Footer
 st.divider()
-st.caption("Hosted via Tailscale Funnel • 2024")
+st.caption("Hosted via ICE CLOUD • 2025")
