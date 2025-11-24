@@ -17,7 +17,6 @@ st.info(
     "The **Encrypted Image Decoder** has moved to a dedicated server for faster performance and better stability."
 )
 
-st.write("You should be redirected automatically in a moment...")
 
 # --- 1. The Manual Fallback Button ---
 # This is crucial in case the browser blocks the automatic script
